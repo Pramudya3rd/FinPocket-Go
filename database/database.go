@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"finpocket.com/api/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -34,5 +35,6 @@ func ConnectDb() {
 	// db.AutoMigrate(&models.Book{})
 
 	DBConn = db
+	db.AutoMigrate(&models.Category{})
 
 }
