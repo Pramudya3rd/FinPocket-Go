@@ -14,13 +14,15 @@ import (
 
 type StorageClient struct {
 	client     *storage.Client
-	projectId  string
 	bucketName string
 	path       string
 }
 
 func Init(path string) *StorageClient {
-	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "keys/"+os.Getenv("CLOUD_SERVICE_ACCOUNT_KEY"))
+	if os.Getenv("CLOUD_SERVICE_ACCOUNT_KEY") != "" {
+		os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "keys/"+os.Getenv("CLOUD_SERVICE_ACCOUNT_KEY"))
+	}
+
 	client, err := storage.NewClient(context.Background())
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
@@ -28,7 +30,6 @@ func Init(path string) *StorageClient {
 
 	return &StorageClient{
 		client:     client,
-		projectId:  os.Getenv("CLOUD_PROJECT_ID"),
 		bucketName: os.Getenv("CLOUD_BUCKET_NAME"),
 		path:       path,
 	}

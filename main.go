@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"finpocket.com/api/database"
 	"finpocket.com/api/routes"
@@ -10,12 +11,20 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
+	if os.Getenv("APP_ENV") != "production" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
 	}
 
 	database.ConnectDb()
+
 	app := fiber.New()
 
 	if err := routes.SeedCategories(); err != nil {
@@ -24,5 +33,5 @@ func main() {
 
 	routes.Setup(app)
 
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(":" + port))
 }

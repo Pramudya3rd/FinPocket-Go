@@ -28,8 +28,6 @@ func ConnectDb() {
 		os.Exit(2)
 	}
 
-	log.Println("connected")
-
 	db.AutoMigrate(&models.User{})
 	db.AutoMigrate(&models.Category{})
 
