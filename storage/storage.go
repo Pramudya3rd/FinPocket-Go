@@ -20,7 +20,10 @@ type StorageClient struct {
 }
 
 func Init(path string) *StorageClient {
-	os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "keys/"+os.Getenv("CLOUD_SERVICE_ACCOUNT_KEY"))
+	if os.Getenv("CLOUD_SERVICE_ACCOUNT_KEY") != "" {
+		os.Setenv("GOOGLE_APPLICATION_CREDENTIALS", "keys/"+os.Getenv("CLOUD_SERVICE_ACCOUNT_KEY"))
+	}
+
 	client, err := storage.NewClient(context.Background())
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"finpocket.com/api/database"
 	"finpocket.com/api/routes"
@@ -24,5 +25,10 @@ func main() {
 
 	routes.Setup(app)
 
-	log.Fatal(app.Listen(":3000"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+
+	log.Fatal(app.Listen("0.0.0.0:" + port))
 }
