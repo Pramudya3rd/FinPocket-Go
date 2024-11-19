@@ -13,7 +13,6 @@ var (
 	DBConn *gorm.DB
 )
 
-// connectDb
 func ConnectDb() {
 	dbPort := os.Getenv("DB_PORT")
 	dbHost := os.Getenv("DB_HOST")
@@ -31,10 +30,8 @@ func ConnectDb() {
 
 	log.Println("connected")
 
-	// TODO: @ldriko @Pramudya3rd make migrations
-	// db.AutoMigrate(&models.Book{})
-
-	DBConn = db
+	db.AutoMigrate(&models.User{})
 	db.AutoMigrate(&models.Category{})
 
+	DBConn = db
 }

@@ -22,11 +22,7 @@ func main() {
 		log.Fatal("Error seeding categories:")
 	}
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
-
-	routes.SetupRoutes(app)
+	routes.Setup(app)
 
 	log.Fatal(app.Listen(":3000"))
 }

@@ -36,7 +36,3 @@ func GetCategories(c *fiber.Ctx) error {
 		"data":    Categories,
 	})
 }
-
-func SetupRoutes(app *fiber.App) {
-	app.Get("/categories", GetCategories)
-}
