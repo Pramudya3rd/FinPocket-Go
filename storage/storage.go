@@ -14,7 +14,6 @@ import (
 
 type StorageClient struct {
 	client     *storage.Client
-	projectId  string
 	bucketName string
 	path       string
 }
@@ -31,7 +30,6 @@ func Init(path string) *StorageClient {
 
 	return &StorageClient{
 		client:     client,
-		projectId:  os.Getenv("CLOUD_PROJECT_ID"),
 		bucketName: os.Getenv("CLOUD_BUCKET_NAME"),
 		path:       path,
 	}
