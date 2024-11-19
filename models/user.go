@@ -6,5 +6,7 @@ type User struct {
 	gorm.Model
 
 	Picture    string `json:"picture"`
-	FirebaseID string `json:"firebase_id" gorm:"unique"`
+	FirebaseID string `json:"firebase_id" gorm:"unique not null"`
+
+	Plan []Plan
 }
