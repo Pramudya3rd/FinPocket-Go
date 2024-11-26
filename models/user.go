@@ -7,6 +7,4 @@ type User struct {
 
 	Picture    string `json:"picture"`
 	FirebaseID string `json:"firebase_id" gorm:"unique;not null"`
-
-	Plan []Plan
 }
