@@ -7,4 +7,6 @@ func Setup(app *fiber.App) {
 	app.Put("/users/:user/picture", UpdateUserPicture)
 
 	app.Get("/categories", GetCategories)
+
+	auth := app.Group("", middleware.Auth)
 }
