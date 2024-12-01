@@ -29,10 +29,10 @@ func Auth(c *fiber.Ctx) error {
 		})
 	}
 
-	id := header[1]
+	firebaseId := header[1]
 
 	var user models.User
-	database.DBConn.First(&user, id)
+	database.DBConn.Where("firebase_id = ?", firebaseId).First(&user)
 
 	if user.ID == 0 {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
