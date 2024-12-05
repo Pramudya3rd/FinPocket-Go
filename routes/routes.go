@@ -7,12 +7,11 @@ import (
 
 func Setup(app *fiber.App) {
 	app.Post("/users", CreateUser)
-	app.Put("/users/:user/picture", UpdateUserPicture)
-
-	app.Get("/categories", GetCategories)
+	app.Post("/users", CreateUser)
 
 	auth := app.Group("", middleware.Auth)
 
+	auth.Put("/users/picture", UpdateUserPicture)
 	auth.Get("/plans", GetPlans)
 	auth.Get("/plans/active", GetActivePlan)
 	auth.Post("/plans", CreatePlan)
