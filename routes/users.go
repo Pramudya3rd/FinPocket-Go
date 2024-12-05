@@ -34,15 +34,7 @@ func CreateUser(c *fiber.Ctx) error {
 }
 
 func UpdateUserPicture(c *fiber.Ctx) error {
-	id := c.Params("user")
-	user := new(models.User)
-	if err := database.DBConn.Where("id = ?", id).First(&user).Error; err != nil {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"message": "User tidak ditemukan",
-			"status":  "error",
-			"data":    nil,
-		})
-	}
+	user := c.Locals("user").(*models.User)
 
 	file, err := c.FormFile("picture")
 	if err != nil {
