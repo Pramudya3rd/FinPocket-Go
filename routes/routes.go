@@ -18,6 +18,8 @@ func Setup(app *fiber.App) {
 	auth.Put("/plans", UpdatePlan)
 	auth.Delete("/plans", DisablePlan)
 
+	auth.Get("/categories", GetCategories)
+
 	auth.Get("/transactions", GetTransactions)
 	auth.Post("/transactions", CreateTransaction)
 	auth.Get("/transactions/summaries", GetTransactionSummaries)
